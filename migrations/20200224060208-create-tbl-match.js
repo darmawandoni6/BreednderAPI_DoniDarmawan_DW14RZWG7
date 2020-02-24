@@ -2,26 +2,29 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable("tbl_matches", {
-      id_match: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_email: {
-        type: Sequelize.STRING,
-        references: {
-          model: "tbl_users",
-          key: "email"
-        },
-        onUpdate: "cascade",
-        onDelete: "cascade"
+      status: {
+        type: Sequelize.BOOLEAN
       },
       id_pet: {
         type: Sequelize.INTEGER,
         references: {
           model: "tbl_pets",
-          key: "id_pet"
+          key: "id"
+        },
+        onUpdate: "cascade",
+        onDelete: "cascade"
+      },
+      id_like: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "tbl_pets",
+          key: "id"
         },
         onUpdate: "cascade",
         onDelete: "cascade"

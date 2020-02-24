@@ -14,35 +14,41 @@ app.use(function(req, res, next) {
 });
 
 const authControler = require("./controlers/auth");
-const query = require("./controlers/query");
+const species = require("./controlers/species/query");
+const pet = require("./controlers/pet/query");
+const user = require("./controlers/user/query");
+const Payment = require("./controlers/payment/query");
+const Match = require("./controlers/match/query");
 const { authenticated } = require("./midleware");
 
 app.group("/api/v1", router => {
-  //tbl_age
-  router.post("/insertAge", query.insertAge);
-
-  //tbl_tbl_spesies
-  router.post("/insertSpecies", query.insertSpecies);
-
-  //tbl_user
-  router.post("/insertUser", query.insertUser);
+  //taks 1
   router.post("/login", authControler.login);
+  //taks 2
+  router.post("/Register", authControler.Register);
+  // //task 3
+  router.post("/insertSpecies", species.insertSpecies);
+  router.get("/spesiesAll", species.spesiesAll);
+  // task 4
+  router.post("/addPet", authenticated, pet.addPet);
+  router.get("/petAllJoin", authenticated, pet.petAllJoin);
+  router.put("/updatePet/:id", authenticated, pet.updatePet);
+  router.delete("/deletePet/:id", authenticated, pet.deletePet);
+  // //task 5
+  router.get("/allPet/:id", pet.allPet);
+  // // task 6
+  router.get("/user/:id", authenticated, user.user);
+  router.put("/updateUser/:id", authenticated, user.updateUser);
+  router.delete("/deleteUser/:id", authenticated, user.deleteUser);
+  // // task 7
+  router.get("/chekMatch", authenticated, Match.chekMatch);
+  router.get("/match", authenticated, Match.match);
+  router.patch("/match/:id", authenticated, Match.matchUpdate);
+  router.get("/dataMath", authenticated, Match.dataMath);
 
-  //tbl_spesies
-  router.post("/insertSpecies", query.insertSpecies);
-
-  //tbl_pet
-  router.post("/insertPet", query.insertPet);
-
-  //register
-  router.post("/Register", query.Register);
-
-  // router.get("/users", query.Users);
-  // router.get("/user/:uname/pass", query.User);
-  // router.get("/user2/", query.User2);
-  // router.patch("/updateUser/:id", query.updateUser);
-  // router.delete("/deleteUser/:id", query.deleteUser);
-  // router.post("/login/", authControler.login);
+  // //task 8
+  router.post("/addPremium", authenticated, Payment.addPremium);
+  router.put("/updatePrem/:id", authenticated, Payment.updatePrem);
 });
 
 app.listen(port, () => console.log(port));

@@ -2,7 +2,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable("tbl_payments", {
-      id_payment: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -15,16 +15,16 @@ module.exports = {
         type: Sequelize.STRING
       },
       id_user: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         references: {
           model: "tbl_users",
-          key: "email"
+          key: "id"
         },
         onUpdate: "cascade",
         onDelete: "cascade"
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.ENUM(["Free", "Premium"])
       },
       createdAt: {
         allowNull: false,
