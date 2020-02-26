@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const models = require("../models");
-const User = models.tbl_user;
+const User = models.tbl_users;
 const Pet = models.tbl_pet;
 
 exports.login = (req, res) => {
