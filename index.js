@@ -21,6 +21,10 @@ const Payment = require("./controlers/payment/query");
 const Match = require("./controlers/match/query");
 const { authenticated } = require("./midleware");
 
+app.get("/", (req, res) => {
+  res.send("hello world");
+});
+
 app.group("/api/v1", router => {
   //taks 1
   router.post("/login", authControler.login);
