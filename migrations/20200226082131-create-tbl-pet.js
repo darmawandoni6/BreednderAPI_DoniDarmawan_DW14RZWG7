@@ -9,24 +9,24 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       id_user: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "tbl_users",
-          key: "id"
-        },
-        onUpdate: "cascade",
-        onDelete: "cascade"
+        type: Sequelize.INTEGER
+        // allowNull: false,
+        // references: {
+        //   model: "tbl_users",
+        //   key: "id"
+        // },
+        // onUpdate: "cascade",
+        // onDelete: "cascade"
       },
       id_sepesies: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "tbl_spesies",
-          key: "id"
-        },
-        onUpdate: "cascade",
-        onDelete: "cascade"
+        type: Sequelize.INTEGER
+        // allowNull: false,
+        // references: {
+        //   model: "tbl_spesies",
+        //   key: "id"
+        // },
+        // onUpdate: "cascade",
+        // onDelete: "cascade"
       },
       age: {
         type: Sequelize.ENUM(["Teeneger", "Child", "Adult"])
