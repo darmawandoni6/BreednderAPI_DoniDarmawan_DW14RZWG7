@@ -13,6 +13,7 @@ module.exports = {
       },
       id_pet: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: "tbl_pets",
           key: "id"
@@ -22,6 +23,7 @@ module.exports = {
       },
       id_like: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: "tbl_pets",
           key: "id"

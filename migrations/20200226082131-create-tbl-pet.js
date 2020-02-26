@@ -10,6 +10,7 @@ module.exports = {
       },
       id_user: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: "tbl_users",
           key: "id"
@@ -19,6 +20,7 @@ module.exports = {
       },
       id_sepesies: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: "tbl_spesies",
           key: "id"
