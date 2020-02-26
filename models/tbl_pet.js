@@ -15,11 +15,11 @@ module.exports = (sequelize, DataTypes) => {
   );
   tbl_pet.associate = function(models) {
     // associations can be defined here
-    tbl_pet.belongsTo(models.tbl_spesies, {
-      foreignKey: "id_sepesies"
-    });
     tbl_pet.belongsTo(models.tbl_users, {
       foreignKey: "id_user"
+    });
+    tbl_pet.belongsTo(models.tbl_spesies, {
+      foreignKey: "id_sepesies"
     });
   };
   return tbl_pet;
