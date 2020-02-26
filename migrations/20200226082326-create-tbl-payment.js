@@ -15,14 +15,14 @@ module.exports = {
         type: Sequelize.STRING
       },
       id_user: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "tbl_users",
-          key: "id"
-        },
-        onUpdate: "cascade",
-        onDelete: "cascade"
+        type: Sequelize.INTEGER
+        // allowNull: false,
+        // references: {
+        //   model: "tbl_users",
+        //   key: "id"
+        // },
+        // onUpdate: "cascade",
+        // onDelete: "cascade"
       },
       status: {
         type: Sequelize.ENUM(["Free", "Premium"])
