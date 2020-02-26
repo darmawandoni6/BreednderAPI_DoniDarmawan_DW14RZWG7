@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   tbl_payment.associate = function(models) {
     // associations can be defined here
-    tbl_payment.belongsTo(models.tbl_user, {
+    tbl_payment.belongsTo(models.tbl_users, {
       foreignKey: "id_user"
     });
   };
