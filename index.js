@@ -34,7 +34,7 @@ app.group("/api/v1", router => {
   router.post("/insertSpecies", species.insertSpecies);
   router.get("/spesiesAll", species.spesiesAll);
   // task 4
-  router.post("/addPet", authenticated, pet.addPet);
+  router.get("/addPet", authenticated, pet.addPet);
   router.get("/petAllJoin", authenticated, pet.petAllJoin);
   router.put("/updatePet/:id", authenticated, pet.updatePet);
   router.delete("/deletePet/:id", authenticated, pet.deletePet);

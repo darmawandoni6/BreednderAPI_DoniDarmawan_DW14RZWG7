@@ -1,57 +1,45 @@
 const Pet = require("../../models").tbl_pet;
 const Species = require("../../models").tbl_spesies;
-const User = require("../../models").tbl_user;
+const User = require("../../models").tbl_users;
+const Premium = require("../../models").tbl_payment;
 
 //task 4.1
 exports.addPet = async (req, res) => {
   try {
-    const { name, gender, spesies, age, user, about_pet, photo } = req.body;
-    const addPet = {
-      id_user: user.id,
-      id_sepesies: spesies.id,
-      age,
-      name,
-      gender,
-      photo,
-      about_pet
-    };
-    const result = await Pet.create(addPet);
+    const search = await Premium.findOne({
+      where: { id_user: req.body.id_user }
+    });
+    if (search.status == "Premium") {
+      const data = await Pet.create(req.body);
+      if (data) {
+        console.log(data.id);
 
-    if (result) {
-      const data2 = await Pet.findOne({
-        where: { id: result.id },
-        include: [
-          {
-            model: Species
-          },
-          {
-            model: User
-          }
-        ]
-      });
-
-      res.status(200).send({
-        status: 200,
-        name: data2.id,
-        gender: data2.gender,
-        spesies: {
-          id: data2.tbl_spesy.id,
-          name: data2.tbl_spesy.name
-        },
-        age: data2.age,
-        user: {
-          id: data2.tbl_user.id,
-          name: data2.tbl_user.name,
-          address: data2.tbl_user.address,
-          Phone: data2.tbl_user.phone
-        },
-        about_pet: data2.about_pet,
-        photo: data2.photo
-      });
+        const data2 = await Pet.findOne({
+          where: { id: data.id },
+          include: [
+            { model: Species, attributes: ["name"] },
+            { model: User, attributes: ["name"] }
+          ]
+        });
+        res.send({
+          id: data2.id,
+          name: data2.name,
+          gender: data2.gender,
+          spesies: data2.tbl_spesy.name,
+          age: data2.age,
+          user: data2.tbl_user.name,
+          about_pet: data2.about_pet,
+          photo: data2.photo
+        });
+      } else {
+        res.status(400).send({
+          status: 400,
+          message: "bad request"
+        });
+      }
     } else {
-      res.status(404).send({
-        status: 404,
-        message: "not found"
+      res.send({
+        message: "this is not a premium accoun"
       });
     }
   } catch (error) {

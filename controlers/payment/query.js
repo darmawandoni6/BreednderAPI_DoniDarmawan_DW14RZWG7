@@ -1,5 +1,5 @@
 const Premium = require("../../models").tbl_payment;
-const User = require("../../models").tbl_user;
+const User = require("../../models").tbl_users;
 const jwt = require("jsonwebtoken");
 
 const verifyJwt = jwtHeader => {
@@ -30,40 +30,25 @@ exports.addPremium = async (req, res) => {
     const insetPrem = {
       no_rek,
       proof_of_transfer,
-      id_user: jwtData.values.userId,
       status
     };
-    const data = await Premium.create(insetPrem);
+    const data = await Premium.update(insetPrem, {
+      where: { id_user: jwtData.values.userId }
+    });
+    console.log(insetPrem);
+    console.log(jwtData.values.userId);
+
     if (data) {
-      const data2 = await Premium.findOne({
-        attributes: ["no_rek", "proof_of_transfer", "status"],
-        include: [
-          {
-            model: User,
-            attributes: [
-              "id",
-              "name",
-              "address",
-              "phone",
-              "createdAt",
-              "updatedAt"
-            ]
-          }
-        ],
+      const data2 = await Premium.findOne(insetPrem, {
         where: { id: jwtData.values.userId }
       });
       res.send({
-        no_rek: data2.no_rek,
-        proof_of_transfer: data2.proof_of_transfer,
-        users: {
-          id: jwtData.values.userId,
-          name: data2.tbl_user.name,
-          address: data2.tbl_user.address,
-          phone: data2.tbl_user.phone,
-          createdAt: data2.tbl_user.createdAt,
-          updatedAt: data2.tbl_user.updatedAt
-        }
+        Message:
+          "The request was successful, the status of the account is now " +
+          data2.status
       });
+    } else {
+      res.status(404).send({ status: "error" });
     }
   } catch (error) {
     res.status(404).send({ status: "error" });
