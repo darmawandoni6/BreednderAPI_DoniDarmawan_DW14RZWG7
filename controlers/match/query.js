@@ -345,11 +345,9 @@ exports.matchUpdate = async (req, res) => {
 exports.dataMath = async (req, res) => {
   try {
     const q = req.query;
-    if (q.param2 == "true") stat = 1;
-    else stat = 0;
 
     const data2 = await Match.findOne({
-      where: { id_pet: q.param1, status: stat },
+      where: { id_pet: q.param1, status: q.param2 },
       include: [
         {
           model: Pet,
