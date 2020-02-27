@@ -58,46 +58,49 @@ exports.Register = async (req, res) => {
           name: body.pet.name,
           gender: body.pet.gender
         };
+        await Payment.create(paymentBody);
         const data2 = await Pet.create(petData);
-        if (data2) {
-          const data3 = await Pet.findOne({
-            where: {
-              id: data2.id
-            },
-            include: [
-              {
-                model: User
-              },
-              {
-                model: Spesies
-              }
-            ]
-          });
-          if (data3) {
-            const data4 = await Payment.create(paymentBody);
-            res.send({
-              id: data3.tbl_user.id,
-              name: data3.tbl_user.name,
-              email: data3.tbl_user.email,
-              phone: data3.tbl_user.phone,
-              address: data3.tbl_user.address,
-              pet: {
-                id: data3.id,
-                name: data3.name,
-                age: data3.age,
-                gender: data3.gender,
-                spesies: data3.tbl_spesy.name
-              },
-              token: token
-            });
-          } else {
-            res.status(400).send({ Message: "Bad request" });
-          }
-        }
-      } else {
         res.send({
-          Message: "400"
+          data2
         });
+        //   if (data2) {
+        //     const data3 = await Pet.findOne({
+        //       where: {
+        //         id: data2.id
+        //       },
+        //       include: [
+        //         {
+        //           model: User
+        //         },
+        //         {
+        //           model: Spesies
+        //         }
+        //       ]
+        //     });
+        //     if (data3) {
+        //       res.send({
+        //         id: data3.tbl_user.id,
+        //         name: data3.tbl_user.name,
+        //         email: data3.tbl_user.email,
+        //         phone: data3.tbl_user.phone,
+        //         address: data3.tbl_user.address,
+        //         pet: {
+        //           id: data3.id,
+        //           name: data3.name,
+        //           age: data3.age,
+        //           gender: data3.gender,
+        //           spesies: data3.tbl_spesy.name
+        //         },
+        //         token: token
+        //       });
+        //     } else {
+        //       res.status(400).send({ Message: "Bad request" });
+        //     }
+        //   }
+        // } else {
+        //   res.send({
+        //     Message: "400"
+        //   });
       }
     }
   } catch (error) {
