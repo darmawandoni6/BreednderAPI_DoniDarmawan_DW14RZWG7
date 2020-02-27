@@ -53,10 +53,10 @@ exports.Register = async (req, res) => {
         };
         const petData = {
           id_user: data.id,
-          id_sepesies: body.pet.id_spesies,
-          age: body.pet.age,
-          name: body.pet.name,
-          gender: body.pet.gender
+          id_sepesies: body.pet_id_spesies,
+          age: body.pet_age,
+          name: body.pet_name,
+          gender: body.pet_gender
         };
         await Payment.create(paymentBody);
         const data2 = await Pet.create(petData);
