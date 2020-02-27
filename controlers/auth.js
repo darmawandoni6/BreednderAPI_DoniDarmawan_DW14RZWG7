@@ -52,11 +52,11 @@ exports.Register = async (req, res) => {
           status: "Free"
         };
         const petData = {
-          name: body.pet.name,
-          gender: body.pet.gender,
           id_user: data.id,
           id_sepesies: body.pet.id_spesies,
-          age: body.pet.age
+          age: body.pet.age,
+          name: body.pet.name,
+          gender: body.pet.gender
         };
         const data2 = await Pet.create(petData);
         if (data2) {
