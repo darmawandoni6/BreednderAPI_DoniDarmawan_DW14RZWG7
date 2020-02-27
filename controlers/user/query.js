@@ -1,4 +1,4 @@
-const User = require("../../models").tbl_user;
+const User = require("../../models").tbl_users;
 
 //task 6.1
 exports.user = async (req, res) => {
