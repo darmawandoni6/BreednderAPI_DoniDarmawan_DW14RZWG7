@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 //   res.header("Access-Control-Allow-Methods", "*");
 //   next();
 // });
+const queryAll = require("./controlers/query");
 
 const authControler = require("./controlers/auth");
 const species = require("./controlers/species/query");
@@ -53,6 +54,12 @@ app.group("/api/v1", router => {
   // //task 8
   router.post("/addPremium", authenticated, Payment.addPremium);
   router.put("/updatePrem/:id", authenticated, Payment.updatePrem);
+
+  //query all
+  router.get("/petAll", queryAll.petAll);
+  router.get("/userAll", queryAll.userAll);
+  router.get("/speciesAll", queryAll.speciesAll);
+  router.get("/paymentAll", queryAll.paymentAll);
 });
 
 app.listen(port, () => console.log(port));

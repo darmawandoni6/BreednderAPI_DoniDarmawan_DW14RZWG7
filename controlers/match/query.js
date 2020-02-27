@@ -1,7 +1,7 @@
 const Match = require("../../models").tbl_match;
 const Pet = require("../../models").tbl_pet;
 const Species = require("../../models").tbl_spesies;
-const User = require("../../models").tbl_user;
+const User = require("../../models").tbl_users;
 
 //task 7.1
 exports.chekMatch = async (req, res) => {

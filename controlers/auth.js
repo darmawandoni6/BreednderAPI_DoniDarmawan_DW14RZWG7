@@ -58,7 +58,6 @@ exports.Register = async (req, res) => {
           id_sepesies: body.pet.id_spesies,
           age: body.pet.age
         };
-        const data4 = await Payment.create(paymentBody);
         const data2 = await Pet.create(petData);
         if (data2) {
           const data3 = await Pet.findOne({
@@ -75,6 +74,7 @@ exports.Register = async (req, res) => {
             ]
           });
           if (data3) {
+            const data4 = await Payment.create(paymentBody);
             res.send({
               id: data3.tbl_user.id,
               name: data3.tbl_user.name,
